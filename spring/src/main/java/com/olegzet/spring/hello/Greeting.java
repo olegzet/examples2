@@ -1,4 +1,4 @@
-package spring.hello;
+package com.olegzet.spring.hello;
 
 public class Greeting {
 

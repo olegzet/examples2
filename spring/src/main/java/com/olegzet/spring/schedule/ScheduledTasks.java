@@ -1,4 +1,4 @@
-package spring.hello;
+package com.olegzet.spring.schedule;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

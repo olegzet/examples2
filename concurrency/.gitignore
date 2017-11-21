@@ -8,6 +8,7 @@
 bin
 build
 target
+out
 *.sublime-*
 /scratch
 .gradle
