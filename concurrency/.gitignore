@@ -13,4 +13,6 @@ out
 /scratch
 .gradle
 *.iml
+*.ipr
+*.iws
 .idea
