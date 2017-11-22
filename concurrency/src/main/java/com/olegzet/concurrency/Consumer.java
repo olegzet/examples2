@@ -6,9 +6,9 @@ import java.util.concurrent.BlockingQueue;
  * Created by oleg.zorin on 21.11.2017.
  */
 public class Consumer implements Runnable {
-    protected BlockingQueue queue = null;
+    protected BlockingQueue<String> queue = null;
 
-    public Consumer(BlockingQueue queue) {
+    public Consumer(BlockingQueue<String> queue) {
         this.queue = queue;
     }
 
