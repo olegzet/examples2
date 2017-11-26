@@ -19,11 +19,16 @@ public class Incremenator extends Thread {
                 else
                     Program.mValue--;
                 System.out.print(Program.mValue + " ");
-            } else return;
+            } else {
+                System.out.println("Interrupted");
+                return;
+            }
 
             try {
-                Thread.sleep(1000);        //Приостановка потока на 1 сек.
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
+                System.out.println("InterruptedException!");
+                return;
             }
         } while (true);
     }

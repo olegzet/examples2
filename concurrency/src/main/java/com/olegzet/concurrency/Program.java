@@ -13,12 +13,11 @@ public class Program {
         System.out.print("Значение = ");
         mInc.start();
 
-        //Троекратное изменение действия инкременатора
-        //с интервалом в i*2 секунд
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 2; i++) {
             try {
                 Thread.sleep(i * 2 * 1000);
             } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             mInc.changeAction();
