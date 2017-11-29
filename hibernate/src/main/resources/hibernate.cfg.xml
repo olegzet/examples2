@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="user.country.format">US</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.99.100:3306/hibernate_basics_tutorial</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">mysql123</property>
+        <!--<property name="hibernate.physical_naming_strategy">org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl</property>-->
+        <mapping class="com.olegzet.hibernate.Artist"/>
+    </session-factory>
+</hibernate-configuration>
