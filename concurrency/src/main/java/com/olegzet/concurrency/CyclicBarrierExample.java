@@ -1,5 +1,8 @@
 package com.olegzet.concurrency;
 
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CyclicBarrier;
 
 /**
@@ -7,6 +10,14 @@ import java.util.concurrent.CyclicBarrier;
  */
 public class CyclicBarrierExample {
     public static void main(String[] args) throws Exception {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        for (Integer n : list) {
+            System.out.println(n);
+        }
+        list.forEach(n -> {
+            System.out.println(n);
+            System.out.println(n);
+        });
         Runnable barrier1Action = () -> System.out.println("BarrierAction 1 executed ");
         Runnable barrier2Action = () -> System.out.println("BarrierAction 2 executed ");
 
