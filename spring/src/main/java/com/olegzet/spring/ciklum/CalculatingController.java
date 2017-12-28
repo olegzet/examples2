@@ -1,6 +1,7 @@
 package com.olegzet.spring.ciklum;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,24 +12,29 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.Map;
-import java.util.UUID;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
 @RestController
+@Scope(SCOPE_REQUEST)
 @Validated
 public class CalculatingController {
-    private static final String template = "Number is %s.";
-
     @Autowired
     ServletContext servletContext;
 
+    @Autowired
+    MathService mathService;
+
     @GetMapping(path = "/calculating")
-    public Map<String, String> calculating(
+    public ResponseSuccess calculating(
             @Min(value = 1, message = "Min number should be 1")
             @Max(value = 99, message = "Max number should be 99")
-            @RequestParam(value = "num", required = false) Short num) {
-        return Collections.singletonMap("uuid", UUID.randomUUID().toString());
+            @RequestParam(value = "num", required = false) short num) {
+        final ResponseSuccess responseSuccess = new ResponseSuccess(mathService.processNumber(num).toString());
+        responseSuccess.add(linkTo(methodOn(CalculatingController.class).calculating(num)).withSelfRel());
+        return responseSuccess;
     }
 
     @ExceptionHandler
