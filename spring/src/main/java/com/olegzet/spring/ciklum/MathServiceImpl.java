@@ -3,6 +3,7 @@ package com.olegzet.spring.ciklum;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.time.ZonedDateTime;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,6 +23,11 @@ public class MathServiceImpl implements MathService {
 
     @PostConstruct
     public void init() {
+    }
+
+    @PreDestroy
+    public void destroy() {
+        threadPool.shutdownNow();
     }
 
     @Override

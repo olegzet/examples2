@@ -16,14 +16,14 @@ public class MultithreadClient {
         long start = System.nanoTime();
 
         List<Future<Double>> futures = new ArrayList<>();
-        for (int i = 0; i < 400; i++) {
+/*        for (int i = 0; i < 400; i++) {
             final int j = i;
             futures.add(
                     CompletableFuture.supplyAsync(
                             () -> counter.count(j),
                             threadPool
                     ));
-        }
+        }*/
 
         double value = 0;
         for (Future<Double> future : futures) {
