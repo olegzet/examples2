@@ -6,11 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Node {
-    private int data;
+    private int value;
 
     private Node next;
 
-    public Node(int data) {
-        this.data = data;
+    public Node(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" + "value=" + value + '}';
     }
 }

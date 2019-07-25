@@ -39,15 +39,15 @@ public class hareTortoise {
         while (true) {
             tortoise = tortoise.getNext();
 
-            System.out.println("tortoise: " + tortoise.getData());
+            System.out.println("tortoise: " + tortoise.toString());
 
             if (hare.getNext() != null)
                 hare = hare.getNext().getNext();
             else
                 return false;
 
-            System.out.println("hare: " + hare.getData());
-            
+            System.out.println("hare: " + hare.toString());
+
             if ((tortoise == null) || (hare == null))
                 return false;
 
