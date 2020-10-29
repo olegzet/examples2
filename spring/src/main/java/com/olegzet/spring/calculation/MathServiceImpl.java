@@ -1,4 +1,4 @@
-package com.olegzet.spring.ciklum;
+package com.olegzet.spring.calculation;
 
 import org.springframework.stereotype.Service;
 

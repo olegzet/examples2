@@ -1,4 +1,4 @@
-package com.olegzet.spring.ciklum;
+package com.olegzet.spring.calculation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ResponseError {
-    private final long timestamp;
+    private final String timestamp;
     private final int status;
     private final String error;
     private final String message;
