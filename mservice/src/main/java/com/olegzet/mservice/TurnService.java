@@ -1,7 +1,8 @@
 package com.olegzet.mservice;
 
+interface TurnService {
 
-intrface TurnService {
-    
+    String turnOn(String id);
 
+    UserDTO attachUser(String user, String lampId);
 }
