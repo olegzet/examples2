@@ -5,26 +5,23 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.MediaTypes.HAL_JSON_VALUE;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import static org.springframework.http.HttpHeaders.ACCEPT;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @Tag(name = "Result", description = "REST API for Result of Calculations")
+@RequestMapping("/results")
 public class ResultController {
     @Autowired
     MathService mathService;
 
-    @GetMapping(path = "/results")
+    @GetMapping(produces = HAL_JSON_VALUE)
     @Operation(tags = {"Result"})
     public ResultsResponse getResults() {
         return new ResultsResponse(mathService.getResults().entrySet()
@@ -34,7 +31,7 @@ public class ResultController {
     }
 
     @Operation(tags = {"Result"})
-    @GetMapping(path = "/results/{id}", headers = ACCEPT + "=" + APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{id}", produces = HAL_JSON_VALUE)
     public ResultResponse getResult(@PathVariable("id") String id) {
         long result = mathService.getResult(id);
         if (result == -1) {
@@ -44,7 +41,7 @@ public class ResultController {
     }
 
     @Operation(tags = {"Result"})
-    @DeleteMapping(path = "/results/{id}", headers = ACCEPT + "=" + APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/{id}", produces = HAL_JSON_VALUE)
     public ResponseEntity<Void> extractResult(@PathVariable("id") String id) {
         long result = mathService.extractResult(id);
         if (result == -1) {

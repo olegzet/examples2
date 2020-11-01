@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.UUID;
 
+import static org.springframework.hateoas.MediaTypes.HAL_JSON_VALUE;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-import static org.springframework.http.HttpHeaders.ACCEPT;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
@@ -36,20 +35,19 @@ public class CalculationController {
             responses = {
                     @ApiResponse(responseCode = "200",
                             description = "Init calculation was successful, links to result  in output payload",
-                            content = @Content(mediaType = "application/json",
+                            content = @Content(mediaType = HAL_JSON_VALUE,
                                     schema = @Schema(implementation = CalculationResponse.class))),
                     @ApiResponse(responseCode = "400", description = "Wrong parameters of request",
-                            content = @Content(mediaType = "application/json",
+                            content = @Content(mediaType = APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = ResponseError.class))),
                     @ApiResponse(responseCode = "405", description = "Validation exception",
-                            content = @Content(mediaType = "application/json",
+                            content = @Content(mediaType = APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = ResponseError.class)))},
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Params for calculation", required = true,
                     content = @Content(
                             schema = @Schema(implementation = CalculationBody.class))))
-    @PostMapping(path = "/calculations"
-            , headers = {CONTENT_TYPE + "=" + APPLICATION_JSON_VALUE, ACCEPT + "=" + APPLICATION_JSON_VALUE})
+    @PostMapping(path = "/calculations", consumes = APPLICATION_JSON_VALUE, produces = HAL_JSON_VALUE)
     public CalculationResponse calculations(@Valid @RequestBody CalculationBody calculationBody) {
         String uuid = UUID.randomUUID().toString();
         Short number = calculationBody.getNumber();
